@@ -1,0 +1,139 @@
+﻿<UserControl x:Name="businessUserControl" x:Class="Team7GUI.BusinessPage.BusinessUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Team7GUI.BusinessPage"
+             mc:Ignorable="d" 
+             d:DesignHeight="720" d:DesignWidth="1280" GotFocus="BusinessUserControl_GotFocus">
+    <Grid Margin="0" Background="#FF8F8F8F">
+        <GroupBox Header="Location" HorizontalAlignment="Left" Height="312" Margin="10,10,0,0" VerticalAlignment="Top" Width="207" Tag="Location">
+            <Grid Height="296" Margin="0" VerticalAlignment="Top">
+                <Label Content="State" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                <ComboBox x:Name="stateBox" HorizontalAlignment="Left" Margin="66,12,0,0" VerticalAlignment="Top" Width="115" IsEditable="True" 
+		        IsReadOnly="True" Text="Select a State" DisplayMemberPath="State" SelectionChanged="StateBox_SelectionChanged"/>
+                <Label Content="City" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
+                <ListBox x:Name="cityBox" Height="89" Margin="2,67,2,0" VerticalAlignment="Top" SelectionChanged="CityBox_SelectionChanged" DisplayMemberPath="City"/>
+                <Label Content="Zipcode" HorizontalAlignment="Left" Margin="10,171,0,0" VerticalAlignment="Top"/>
+
+                <ListBox x:Name="zipBox" Height="89" Margin="2,197,2,0" VerticalAlignment="Top" SelectionChanged="ZipBox_SelectionChanged"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="SEARCH RESULTS" HorizontalAlignment="Left" Height="400" Margin="222,10,0,0" VerticalAlignment="Top" Width="759">
+            <DataGrid x:Name="businessGrid" Height="348" Width="750" Margin="10,22,0,0" FontSize="10" VerticalScrollBarVisibility="Visible" CanUserResizeColumns="False" CanUserReorderColumns="False" AutoGenerateColumns="False" HorizontalScrollBarVisibility="Disabled" SelectionChanged="BusinessGrid_SelectionChanged" CanUserResizeRows="False" IsReadOnly="True" ColumnWidth="*">
+                <DataGrid.ColumnHeaderStyle>
+                    <Style TargetType="DataGridColumnHeader">
+                        <EventSetter Event="Click" Handler="ColumnHeader_Click" />
+                    </Style>
+                </DataGrid.ColumnHeaderStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Name}" Width="200" Header="Business Name" CanUserSort="False"/>
+                    <DataGridTextColumn Binding="{Binding Address}" Width="195" Header="Address" CanUserSort="False"/>
+                    <DataGridTextColumn Binding="{Binding City}" Width="80" Header="City" CanUserSort="False"/>
+                    <DataGridTextColumn Binding="{Binding State}" Width="35" Header="State" CanUserSort="False"/>
+                    <DataGridTextColumn Binding="{Binding Distance}" Width="50" Header="Distance&#xA;(Miles)" CanUserSort="False"/>
+                    <DataGridTextColumn Binding="{Binding Stars}" Width="32" Header="Stars" CanUserSort="False"/>
+                    <DataGridTextColumn Binding="{Binding Reviewcount}" Width="40" Header="# Of &#xA;Reviews" CanUserSort="False"/>
+                    <DataGridTextColumn Binding="{Binding Reviewrating}" Width="40" Header="Avg &#xA;Review &#xA;Rating" CanUserSort="False"/>
+                    <DataGridTextColumn Binding="{Binding Numcheckins}" Header="Total &#xA;checkins" CanUserSort="False"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+        <GroupBox Header="Business Category" HorizontalAlignment="Left" Margin="10,328,0,0" Width="207">
+            <Grid Margin="0">
+                <ListBox x:Name="categoryBox" Margin="0,31,0,0" SelectionChanged="CategoryBox_SelectionChanged" SelectionMode="Multiple"/>
+                <Button x:Name="ResetCategories" Content="Reset" HorizontalAlignment="Left" Margin="99,6,0,0" VerticalAlignment="Top" Width="96" Click="ResetCategories_Click"/>
+                <Label Content="Selected:" HorizontalAlignment="Left" Margin="0,3,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="SelectedCategoryCount" HorizontalAlignment="Left" Height="19" Margin="57,7,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="37" Background="Transparent" BorderBrush="#00ABADB3" Text="0"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="businessInfoGroup" Header="Selected Business" Margin="222,407,0,0" IsEnabled="False">
+            <Grid Margin="0">
+                <TextBox x:Name="businessInfoBox" HorizontalAlignment="Left" Height="83" Margin="7,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" FontWeight="Bold" Background="#FFE6E1E1" IsReadOnly="True"/>
+                <TextBox x:Name="businessAttributesTextBox" HorizontalAlignment="Left" Height="95" Margin="194,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="207" FontWeight="Bold" Background="#FFE6E1E1" VerticalScrollBarVisibility="Auto" IsReadOnly="True"/>
+                <TextBox x:Name="businessHoursTextBox" HorizontalAlignment="Left" Height="53" Margin="7,169,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="117" FontWeight="Bold" Background="#FFE6E1E1" VerticalScrollBarVisibility="Disabled" IsReadOnly="True"/>
+                <TextBox x:Name="businessCategoriesTextBox" HorizontalAlignment="Left" Height="66" Margin="7,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" FontWeight="Bold" Background="#FFE6E1E1" VerticalScrollBarVisibility="Auto" IsReadOnly="True"/>
+                <Button x:Name="showCheckInsButton" Content="Show Check-Ins" HorizontalAlignment="Left" Margin="194,110,0,0" VerticalAlignment="Top" Width="101" Height="52" Click="ShowCheckInsButton_Click"/>
+                <Button x:Name="addToFavoritesButton" Content="Add to Favorites" HorizontalAlignment="Left" Margin="304,110,0,0" VerticalAlignment="Top" Width="97" Height="52" Click="AddToFavoritesButton_Click"/>
+                <Button x:Name="showReviewsButton" Content="Show Reviews" HorizontalAlignment="Left" Margin="194,169,0,0" VerticalAlignment="Top" Width="100" Height="53" IsCancel="True" Click="ShowReviewsButton_Click"/>
+                <Button x:Name="writeReviewButton" Content="Write a Review" HorizontalAlignment="Left" Margin="304,169,0,0" VerticalAlignment="Top" Width="97" Height="53" Click="WriteReviewButton_Click"/>
+                <DataGrid x:Name="friendsReviews" Margin="406,0,0,0" AutoGenerateColumns="False" ColumnWidth="*" SelectionMode="Single" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Username}" Width="100" Header="Name"/>
+                        <DataGridTextColumn Binding="{Binding Reviewdate}" Width="75" Header="Date"/>
+                        <DataGridTemplateColumn Header="Text">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock 
+                                                Text="{Binding Reviewtext}" 
+                                                TextWrapping="Wrap"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button x:Name="checkInButton" Content="Check-In" HorizontalAlignment="Left" Margin="130,169,0,0" VerticalAlignment="Top" Width="59" Height="53" Click="CheckInButton_Click"/>
+                <GroupBox x:Name="writeReviewGroup" Header="Write Review" Margin="405,-3,0,0" Visibility="Hidden">
+                    <Grid Margin="0">
+                        <TextBox x:Name="writeReviewBox" TextWrapping="Wrap" Margin="4,0,87,0"/>
+                        <Label Content="Rating:" Margin="0,23,-5,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="82"/>
+                        <ComboBox x:Name="ratingComboBox" Margin="0,49,10,0" VerticalAlignment="Top" Width="67" HorizontalAlignment="Right">
+                            <ComboBoxItem Content="&lt;Rate&gt;" IsSelected="True"/>
+                            <ComboBoxItem Content="5"/>
+                            <ComboBoxItem Cursor=""/>
+                            <ComboBoxItem Content="4"/>
+                            <ComboBoxItem Content="3.5"/>
+                            <ComboBoxItem Content="3"/>
+                            <ComboBoxItem Content="2.5"/>
+                            <ComboBoxItem Content="2"/>
+                            <ComboBoxItem Content="1.5"/>
+                            <ComboBoxItem Content="1"/>
+                        </ComboBox>
+                        <Button x:Name="submitReviewButton" Margin="0,138,10,0" VerticalAlignment="Top" Width="67" Height="46" Click="SubmitReviewButton_Click" HorizontalAlignment="Right">
+                            <TextBlock Text="Submit Review" TextWrapping="Wrap" />
+                        </Button>
+                    </Grid>
+                </GroupBox>
+            </Grid>
+        </GroupBox>
+        <TextBox x:Name="numberOfBusinesses" HorizontalAlignment="Left" Height="23" Margin="582,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="203" Background="#00000000" BorderBrush="Transparent"/>
+        <GroupBox x:Name="filterPrice" Header="Filter by Price" Height="111" Margin="986,9,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="136" IsEnabled="False">
+            <Grid Margin="5">
+                <CheckBox x:Name="priceOneCheck" Content="$" Margin="10,1,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Click="Check_Click"/>
+                <CheckBox x:Name="priceTwoCheck" Content="$$" Margin="10,21,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Click="Check_Click"/>
+                <CheckBox x:Name="priceThreeCheck" Content="$$$" Margin="10,41,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Click="Check_Click"/>
+                <CheckBox x:Name="priceFourCheck" Content="$$$$" Margin="10,61,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Click="Check_Click"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="filterMeal" Header="Filter by Meal" HorizontalAlignment="Left" Height="165" Margin="1127,9,0,0" VerticalAlignment="Top" Width="139" IsEnabled="False">
+            <Grid x:Name="mealGrid" Margin="5">
+                <CheckBox x:Name="breakfastCheck" Content="Breakfast" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Click="Check_Click"/>
+                <CheckBox x:Name="brunchCheck" Content="Brunch" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top" Click="Check_Click" />
+                <CheckBox x:Name="dessertCheck" Content="Dessert" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Click="Check_Click" />
+                <CheckBox x:Name="dinnerCheck" Content="Dinner" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Click="Check_Click" />
+                <CheckBox x:Name="lateNightCheck" Content="Late Night" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" Click="Check_Click" />
+                <CheckBox x:Name="lunchCheck" Content="Lunch" HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top"  Click="Check_Click" />
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="filterAttributes" Header="Filter by Attributes" Height="236" Margin="986,174,0,0" VerticalAlignment="Top" IsEnabled="False">
+            <Grid x:Name="mealGrid1" Margin="5">
+                <ListBox x:Name="attributesFilterList" Margin="0,30,0,0" SelectionChanged="AttributesFilterList_SelectionChanged" SelectionMode="Multiple"/>
+                <Button x:Name="ResetAttributes" Content="Reset" HorizontalAlignment="Left" Margin="173,0,0,0" VerticalAlignment="Top" Width="85" Click="ResetAttributes_Click"/>
+                <Label Content="Selected:" HorizontalAlignment="Left" Margin="10,-3,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="SelectedAttributesCount" HorizontalAlignment="Left" Height="19" Margin="72,1,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="37" Background="Transparent" BorderBrush="#00ABADB3" Text="0"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox x:Name="filterDistance" Header="Distance" HorizontalAlignment="Left" Height="54" Margin="986,120,0,0" VerticalAlignment="Top" Width="136" IsEnabled="False">
+            <Grid Margin="0">
+                <ComboBox x:Name="distanceBox" Margin="3" Width="120" IsReadOnly="True" IsEditable="True" SelectedIndex="0" FontSize="14" SelectionChanged="DistanceBox_SelectionChanged">
+                    <ComboBoxItem Content="Any Distance"/>
+                    <ComboBoxItem Content="5 Miles"/>
+                    <ComboBoxItem Content="1 Mile"/>
+                </ComboBox>
+            </Grid>
+        </GroupBox>
+        <Button x:Name="businessMap" Content="Show Map" HorizontalAlignment="Left" Margin="790,26,0,0" VerticalAlignment="Top" Width="90" Height="23" Click="BusinessMap_Click"/>
+        <Button x:Name="resetBusinesses" Content="Reset Filters" HorizontalAlignment="Left" Margin="885,26,0,0" VerticalAlignment="Top" Width="90" Height="23" Click="ResetBusinesses_Click"/>
+        <TextBox x:Name="tempUserBox" HorizontalAlignment="Left" Height="23" Margin="240,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320"/>
+    </Grid>
+</UserControl>
