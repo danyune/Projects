@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>PA1_src</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>exams_1.csv</name>
+			<type>1</type>
+			<location>D:/Downloads/Fall 2018/CS233/dyune/233Rep_Daniel/PA1/example test case/inputs/exams_1.csv</location>
+		</link>
+	</linkedResources>
+</projectDescription>
